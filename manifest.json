@@ -1,0 +1,15 @@
+{
+  "name": "E-com PFC",
+  "short_name": "E-com",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f9fa", // Цвет фона при загрузке
+  "theme_color": "#1a73e8", // Основной цвет интерфейса
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

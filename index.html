@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Подключение манифеста -->
+  <link rel="manifest" href="/manifest.json">
+  <!-- Иконки для старых браузеров -->
+  <link rel="apple-touch-icon" sizes="512x512" href="/icon.png">
+  <title>E-com PFC</title>
+  <link rel="stylesheet" href="style.css"> <!-- Наши стили -->
+</head>
+<body>
+<div class="container">
+  <!-- Основное окно для загрузки приложений -->
+  <div id="app-frame"></div>
+  
+  <!-- Навигация внизу -->
+  <nav class="bottom-nav">
+    <button data-url="https://script.google.com/macros/s/AKfycbwZnapV8kWAeTp-LnYgJdNOHO2F5SiwQwJg47seelKQKn9_pI99C1NX2qiT4DsffXTM/exec" title="Отдел контроля"><i>📦</i></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbycb3AqIH4xadHvM8Rw4NjwxDQsVoVgOh6UBjAytEbT8iQg4S3oza-OQkfMdynXBcwW/exec" title="HR"><i>👥</i></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbyFhoj1pCCRbW-CYIIZLxQ5m-dHT1CATZm8xiDr25TG2Jkg4M5gvoolvD6v3Bmw0N-sCA/exec" title="Учет статусов"><i>📊</i></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbwkEwSr53WMbH9n0x2TbHNzJTAommCX-DW5nKqLn5OpyPeZjJ8IuumCcT89pxS_9opZ/exec" title="Админам складов"><i>🏢</i></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbz3zfSgWkzXP5T5YUq-tPW1kbXs1ImUPS6l57lIzu_3c5-YZXEbmP06O4_nR0wKPrWfwTg/exec" title="Склад МП"><i>📈</i></button>
+  </nav>
+</div>
+
+<script>
+  const PIN_CODE = '3333'; // Оставляем пин здесь
+  let currentFrameUrl = '';
+
+  document.querySelector('.bottom-nav').addEventListener('click', async (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      const url = e.target.dataset.url;
+      
+      // Проверяем пин-код только при первом переходе или смене раздела
+      if (!currentFrameUrl || currentFrameUrl !== url) {
+        await checkPin();
+      }
+
+      // Загружаем новое приложение во фрейм
+      const frame = document.getElementById('app-frame');
+      while (frame.firstChild) frame.removeChild(frame.firstChild);
+      const newIframe = document.createElement('iframe');
+      newIframe.src = url;
+      newIframe.style.width = '100%';
+      newIframe.style.height = 'calc(100% - 60px)'; // Высота минус меню
+      newIframe.allow = 'geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; magnetometer; fullscreen; payment; clipboard-read; clipboard-write';
+      frame.appendChild(newIframe);
+      currentFrameUrl = url;
+    }
+  });
+
+  async function checkPin() {
+    const input = document.createElement('input');
+    input.type = 'password';
+    input.placeholder = 'Введите пинкод';
+    input.autofocus = true;
+    
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.right = '0';
+    overlay.style.bottom = '0';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+
+    const pinBox = document.createElement('div');
+    pinBox.style.padding = '20px';
+    pinBox.style.borderRadius = '10px';
+    pinBox.style.backgroundColor = '#fff';
+    pinBox.style.textAlign = 'center';
+
+    pinBox.innerHTML = `<h3>Пожалуйста, введите пинкод:</h3><br>`;
+    pinBox.appendChild(input);
+
+    overlay.appendChild(pinBox);
+    document.body.appendChild(overlay);
+
+    return new Promise((resolve) => {
+      input.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' && input.value === PIN_CODE) {
+          resolve(true);
+          document.body.removeChild(overlay);
+        } else if (ev.key === 'Escape') {
+          resolve(false);
+          document.body.removeChild(overlay);
+        }
+      });
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* Базовые стили */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  background-color: #f8f9fa;
+  color: #202124;
+}
+
+/* Стиль главного окна */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* На всю высоту экрана */
+  width: 100vw; /* На всю ширину экрана */
+  overflow-y: auto; /* Прокрутка контента */
+  box-sizing: border-box;
+}
+
+/* Для мобильных устройств скрываем верхнюю панель */
+@media screen and (max-width: 600px) {
+  body {
+    overscroll-behavior-y: none; /* Убираем прокрутку страницы */
+  }
+  .container {
+    padding-top: constant(safe-area-inset-top); /* iOS */
+    padding-top: env(safe-area-inset-top); /* iOS */
+  }
+}
