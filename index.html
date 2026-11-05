@@ -2,13 +2,15 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <!-- Адаптивная верстка -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <!-- Подключение манифеста -->
+  
+  <!-- Подключение манифеста PWA -->
   <link rel="manifest" href="/manifest.json">
-  <!-- Иконки для старых браузеров -->
   <link rel="apple-touch-icon" sizes="512x512" href="/icon.png">
+
   <title>E-com PFC</title>
-  <link rel="stylesheet" href="style.css"> <!-- Наши стили -->
+  <link rel="stylesheet" href="style.css"> <!-- Ваши стили -->
 </head>
 <body>
 <div class="container">
@@ -17,11 +19,12 @@
   
   <!-- Навигация внизу -->
   <nav class="bottom-nav">
-    <button data-url="https://script.google.com/macros/s/AKfycbwZnapV8kWAeTp-LnYgJdNOHO2F5SiwQwJg47seelKQKn9_pI99C1NX2qiT4DsffXTM/exec" title="Отдел контроля"><i>📦</i></button>
-    <button data-url="https://script.google.com/macros/s/AKfycbycb3AqIH4xadHvM8Rw4NjwxDQsVoVgOh6UBjAytEbT8iQg4S3oza-OQkfMdynXBcwW/exec" title="HR"><i>👥</i></button>
-    <button data-url="https://script.google.com/macros/s/AKfycbyFhoj1pCCRbW-CYIIZLxQ5m-dHT1CATZm8xiDr25TG2Jkg4M5gvoolvD6v3Bmw0N-sCA/exec" title="Учет статусов"><i>📊</i></button>
-    <button data-url="https://script.google.com/macros/s/AKfycbwkEwSr53WMbH9n0x2TbHNzJTAommCX-DW5nKqLn5OpyPeZjJ8IuumCcT89pxS_9opZ/exec" title="Админам складов"><i>🏢</i></button>
-    <button data-url="https://script.google.com/macros/s/AKfycbz3zfSgWkzXP5T5YUq-tPW1kbXs1ImUPS6l57lIzu_3c5-YZXEbmP06O4_nR0wKPrWfwTg/exec" title="Склад МП"><i>📈</i></button>
+    <!-- Я добавил названия ваших разделов и иконки -->
+    <button data-url="https://script.google.com/macros/s/AKfycbwZnapV8kWAeTp-LnYgJdNOHO2F5SiwQwJg47seelKQKn9_pI99C1NX2qiT4DsffXTM/exec" title="Отдел контроля"><i>📦</i><span>Контроль</span></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbycb3AqIH4xadHvM8Rw4NjwxDQsVoVgOh6UBjAytEbT8iQg4S3oza-OQkfMdynXBcwW/exec" title="HR"><i>👥</i><span>HR</span></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbyFhoj1pCCRbW-CYIIZLxQ5m-dHT1CATZm8xiDr25TG2Jkg4M5gvoolvD6v3Bmw0N-sCA/exec" title="Учет статусов"><i>📊</i><span>Статусы</span></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbwkeEwSr53WMbH9n0x2TbHNzJTAommCX-DW5nKqLn5OpyPeZjJ8IuumCcT89pxS_9opZ/exec" title="Админам складов"><i>🏢</i><span>Склады</span></button>
+    <button data-url="https://script.google.com/macros/s/AKfycbz3zfSgWkzXP5T5YUq-tPW1kbXs1ImUPS6l57lIzu_3c5-YZXEbmP06O4_nR0wKPrWfwTg/exec" title="Склад МП"><i>📈</i><span>МП</span></button>
   </nav>
 </div>
 
@@ -45,7 +48,7 @@
       newIframe.src = url;
       newIframe.style.width = '100%';
       newIframe.style.height = 'calc(100% - 60px)'; // Высота минус меню
-      newIframe.allow = 'geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; magnetometer; fullscreen; payment; clipboard-read; clipboard-write';
+      newIframe.allow = 'geolocation; microphone; camera; midi; vr; accelerator; gyroscope; magnetometer; fullscreen; payment; clipboard-read; clipboard-write';
       frame.appendChild(newIframe);
       currentFrameUrl = url;
     }
